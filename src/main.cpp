@@ -5,39 +5,30 @@
 #include <TouchScreen.h>
 
 
-#include "serialProcess.h"
-#include "screen.h"
-#include "load.h"
+//include my external files
+#include "serialProcess.h" //manages serial setup and interface with reciever
+#include "screen.h" //manages interface with screen
+#include "load.h" //contains details on variables, etc
+
 
 #define BLACK    0x0000
 #define WHITE    0xFFFF
 
-#define TFT_CS 10
+//config for screen - see Adafruit's documentation
+#define TFT_CS 10//lines 18+19 set pins for screen
 #define TFT_DC 9
-Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
-Adafruit_ILI9341 screenLoader::screen = tft;
+Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC); //define a screen object
+Adafruit_ILI9341 screenLoader::screen = tft; //tell the screen loader what screen to use
 
-int th;
-int st;
-
-const int PWM_UPPER = 200;
-const int PWM_LOWER = 100;
-
-const int TH_UPPER = 799;
-const int TH_LOWER = 278;
-const int TH_DEADZONE = 30;
-
-const int ST_UPPER = 950;
-const int ST_LOWER = 0;
-const int ST_DEADZONE = 20;
-
+//TODO: CHANGE THESE TO NAMESPACES
+//load in external objects
 pins pins;
 serialProcess io;
 dataProcess data;
 
 void setup() {
-  load::modeSet();
-  load::serialSetup();
+  load::modeSet(); //set pin modes
+  load::serialSetup(); //configure serial comms
 }
 
 void loop() {
