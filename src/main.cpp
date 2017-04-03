@@ -1,9 +1,9 @@
+//include Adafruit libraries for screen
 #include <Adafruit_ILI9341.h>
-
 #include <Adafruit_GFX.h>
 #include <gfxfont.h>
-
 #include <TouchScreen.h>
+
 
 #include "serialProcess.h"
 #include "screen.h"
