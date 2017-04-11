@@ -7,9 +7,10 @@
 
 
 namespace load {
+    using namespace eraseManager;
     void modeSet();
     void serialSetup();
-    eraseManager::screenObjectArray objectArray;
+    //screenObjectArray objectArray<*roundDial>;
 }
 
 class pins {

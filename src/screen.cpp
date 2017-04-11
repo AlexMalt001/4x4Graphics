@@ -10,6 +10,14 @@
 #include "screen.h"
 #include "load.h"
 
+
+void eraseManager::screenObjectArray::addObject(screenObject * ptr) {
+  length++;
+  first = realloc(first, length);
+  *(first+length) = *ptr;
+}
+
+
 screenLoader :: screenLoader (uint16_t background) {
   backgroundColour = background;
 }
@@ -46,10 +54,6 @@ roundDial :: roundDial (screenLoader _loader, String _label, int _xPos, int _yPo
   lineColour = _lineColour;
   label = _label;
   textColour = _textColour;
-  roundDial test = *this;
-  void (roundDial::*destroyPtr)();
-  destroyPtr = &roundDial::destroy;
-  load::objectArray.addObject(destroyPtr);
   //TODO: ADD CODE TO ADD DESTROY(*)() TO ARRAY
   recalculateVars();
   findValueRadians();

@@ -7,19 +7,6 @@
 #include <gfxfont.h>
 #include <TouchScreen.h>
 
-namespace eraseManager {
-
-  struct eraseData {
-
-  };
-
-  template<class TYPE>
-  class screenObjecvtArray {
-    void addObject(TYPE);
-    int length;
-  };
-
-}
 
 class screenUtils {
 
@@ -57,7 +44,7 @@ class screenObject { //tools extended by all on-screen objects
     void setYPos(int in);
     void setColour(uint16_t colour);
   protected:
-
+    screenObject *getSelfReference();
     int scale;
     int xPos;
     int yPos;
@@ -109,6 +96,17 @@ class linearMeter : public screenObject {
     float minValue;
     float maxValue;
 };
+
+namespace eraseManager {
+
+  class screenObjectArray {
+    public:
+      screenObject * first;
+      int length;
+      void addObject(screenObject* ptr);
+  };
+}
+
 
 
 
