@@ -31,7 +31,7 @@ void setup() {
   load::modeSet(); //set pin modes
   load::serialSetup(); //configure serial comms
   roundDial test(loader, "POT1", 0,0,30,250,0,1024,BLACK,BLACK,BLACK,BLACK);
-  test.destroy();
+  test.erase();
 }
 
 void loop() {
