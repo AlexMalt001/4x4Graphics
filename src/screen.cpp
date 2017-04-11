@@ -18,6 +18,13 @@ void eraseManager::redraw(screenObjectArray & array) {
   }
 }
 
+void eraseManager::erase(screenObjectArray & array) {
+  for (int i=0; i <= array.length; i++) {
+    screenObject &obj  = *(array.first + i);
+    obj.erase();
+  }
+}
+
 
 void eraseManager::screenObjectArray::addObject(screenObject * ptr) {
   length++;
