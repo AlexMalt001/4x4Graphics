@@ -114,6 +114,8 @@ namespace eraseManager {
   };
 
   void redraw(screenObjectArray & array);
+  
+  void erase(screenObjectArray & array);
 
 }
 
