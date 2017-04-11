@@ -40,6 +40,7 @@ class inverseQuartCircle : public screenUtils {
 class screenObject { //tools extended by all on-screen objects
   public:
     virtual void erase();
+    virtual void redraw();
     void setScale(int in);
     void setXPos(int in);
     void setYPos(int in);
@@ -54,6 +55,7 @@ class screenObject { //tools extended by all on-screen objects
 
 class roundDial : public screenObject{ //a semi-round dial filled from lower-limit to value
   public:
+    void redraw();
     void erase();
     void setOutlineColour(uint16_t colour);
     void setScale(int in);
@@ -90,6 +92,7 @@ class linearMeter : public screenObject {
   //TODO:FINISH LINEAR METER
 
   public:
+    void redraw();
     void erase();
   private:
     int oldValue;
@@ -109,6 +112,8 @@ namespace eraseManager {
       int length;
       void addObject(screenObject* ptr);
   };
+
+
 }
 
 
