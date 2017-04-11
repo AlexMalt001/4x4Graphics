@@ -11,6 +11,14 @@
 #include "load.h"
 
 
+void eraseManager::redraw(screenObjectArray & array) {
+  for (int i=0; i <= array.length; i++) {
+    screenObject &obj  = *(array.first + i);
+    obj.redraw();
+  }
+}
+
+
 void eraseManager::screenObjectArray::addObject(screenObject * ptr) {
   length++;
   first = realloc(first, length);
@@ -50,6 +58,14 @@ void roundDial::erase() {
 
 void linearMeter::redraw() {
   //TODO: ADD REDRAW CODE
+}
+
+void roundDial::redraw() {
+  if (value == oldValue) {
+    return;
+  }
+  erase();
+  draw();
 }
 
 

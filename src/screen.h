@@ -113,6 +113,7 @@ namespace eraseManager {
       void addObject(screenObject* ptr);
   };
 
+  void redraw(screenObjectArray & array);
 
 }
 
