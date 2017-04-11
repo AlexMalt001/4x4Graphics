@@ -1,8 +1,28 @@
 #ifndef screen_h
 #define screen_h
 
+//include Adafruit libraries for screen
+#include <Adafruit_ILI9341.h>
+#include <Adafruit_GFX.h>
+#include <gfxfont.h>
+#include <TouchScreen.h>
+
+namespace eraseManager {
+
+  struct eraseData {
+
+  };
+
+  template<class TYPE>
+  class screenObjecvtArray {
+    void addObject(TYPE);
+    int length;
+  };
+
+}
+
 class screenUtils {
-  
+
 };
 
 class screenLoader { //data about screen
@@ -37,8 +57,8 @@ class screenObject { //tools extended by all on-screen objects
     void setYPos(int in);
     void setColour(uint16_t colour);
   protected:
-    
-    int scale;  
+
+    int scale;
     int xPos;
     int yPos;
     uint16_t colour;
@@ -79,7 +99,7 @@ class roundDial : public screenObject{ //a semi-round dial filled from lower-lim
 };
 
 class linearMeter : public screenObject {
-  
+
   private:
     int oldValue;
     String label;

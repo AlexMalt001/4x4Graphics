@@ -8,9 +8,10 @@
 #include "Arduino.h"
 
 #include "screen.h"
+#include "load.h"
 
 screenLoader :: screenLoader (uint16_t background) {
-  backgroundColour = background; 
+  backgroundColour = background;
 }
 
 screenLoader :: screenLoader(const screenLoader& _loader) {
@@ -18,7 +19,7 @@ screenLoader :: screenLoader(const screenLoader& _loader) {
 }
 
 screenLoader::screenLoader() {
-  
+
 }
 
 inverseQuartCircle :: inverseQuartCircle (int _x, int _y, int _radius, unsigned int _colour, bool _top, bool _left, const screenLoader& _loader) {
@@ -31,7 +32,7 @@ inverseQuartCircle :: inverseQuartCircle (int _x, int _y, int _radius, unsigned 
   loader = _loader;
 }
 
-roundDial :: roundDial (screenLoader _loader, String _label, int _xPos, int _yPos, int _scale, 
+roundDial :: roundDial (screenLoader _loader, String _label, int _xPos, int _yPos, int _scale,
                               float _value, float _minValue, float _maxValue, uint16_t _colour, uint16_t _accent, uint16_t _lineColour, uint16_t _textColour){
   loader = _loader;
   xPos = _xPos;
@@ -45,6 +46,11 @@ roundDial :: roundDial (screenLoader _loader, String _label, int _xPos, int _yPo
   lineColour = _lineColour;
   label = _label;
   textColour = _textColour;
+  roundDial test = *this;
+  void (roundDial::*destroyPtr)();
+  destroyPtr = &roundDial::destroy;
+  load::objectArray.addObject(destroyPtr);
+  //TODO: ADD CODE TO ADD DESTROY(*)() TO ARRAY
   recalculateVars();
   findValueRadians();
 }
@@ -67,11 +73,11 @@ void roundDial::draw() { //draws an on screen object of type roundDial on screen
   if(value == oldValue) {//does not redraw if value is the same
     return;
   }
-  
+
   oldValue = value;
   loader.screen.fillCircle(xPos+radius, yPos+radius, radius-1, accent); //fills 'accent circle'
 
-  
+
   if(valueRadians < maxRadians/5) { //first of 3 triangles that cut out the readout bar
     float topangle = HALF_PI-(valueRadians*PI);
     int ypoint0 = (radius/sin(topangle))*sin(valueRadians*PI);
@@ -80,9 +86,9 @@ void roundDial::draw() { //draws an on screen object of type roundDial on screen
     inverseQuartCircle topLeft(xPos,yPos,radius,loader.backgroundColour,true,true,loader);
     topLeft.draw();
   }else {
-    
+
     loader.screen.fillTriangle(xPos,yPos+radius,xPos,yPos,xPos+radius,yPos+radius,colour);
-    
+
     if(valueRadians < 3*(maxRadians/5)) {
       int thirdsidelength = sqrt(2*(pow(radius,2)));
       //Serial.println(thirdsidelength);
@@ -100,13 +106,13 @@ void roundDial::draw() { //draws an on screen object of type roundDial on screen
       loader.screen.fillTriangle(xPos+radius,yPos+radius,xPos,yPos,xPos+(2*radius),yPos, colour);
       inverseQuartCircle topLeft(xPos,yPos,radius,loader.backgroundColour,true,true,loader);
       topLeft.draw();
-      
+
       int firstsidelength = sqrt(2*(pow(radius,2)));
       float sideangle = (valueRadians-(3*(maxRadians/5)))*PI;
       float thirdangle = (PI-sideangle)-(HALF_PI/2);
       int ypoint3 = (firstsidelength/sin(thirdangle))*sin(sideangle);;
       loader.screen.fillTriangle(xPos+radius,yPos+radius,xPos+(2*radius),yPos,xPos+(2*radius),yPos+ypoint3,colour);
-      
+
       inverseQuartCircle topRight(xPos+radius,yPos,radius ,loader.backgroundColour,true,false,loader);
       topRight.draw();
 
@@ -118,7 +124,7 @@ void roundDial::draw() { //draws an on screen object of type roundDial on screen
   }
 
   loader.screen.fillCircle(xPos+radius, yPos+radius, innerRadius, loader.backgroundColour);//'remove' inside of dial (fill with background)
-  
+
   //outlines
   loader.screen.drawCircle(xPos+radius, yPos+radius, innerRadius,lineColour);
   loader.screen.drawCircle(xPos+radius, yPos+radius, radius-1,lineColour);
@@ -211,23 +217,23 @@ void inverseQuartCircle :: draw() {
   int radiusSquared = pow(radius, 2);
   if(left) { //checks if drawing vertical or horizontal
     if(!top) {
-      
+
       int currentx = x+radius;
       int i = 0;
-      
+
       while (x<=currentx) {
         int lowerposy = sqrt(radiusSquared-pow(i,2));
         loader.screen.drawFastVLine(currentx, y+lowerposy, radius-lowerposy, colour);
         currentx = currentx-1;
         i=i+1;
       }
-      
+
     } else {
-      
+
       int currentx = x+radius;
       int currenty = y+radius;
       int i =0;
-      
+
       while (x<=currentx) {
         int lowerposy = sqrt(radiusSquared-pow(i,2));
         int len = (radius-lowerposy);
@@ -236,7 +242,7 @@ void inverseQuartCircle :: draw() {
         currentx = currentx-1;
       }
     }
-    
+
   }else {
     if(top) {
       int maxX = x+radius;
@@ -244,14 +250,14 @@ void inverseQuartCircle :: draw() {
       int i = 0;
       int currentx=x;
       while (currentx<=maxX) {
-        
+
         int lowerposy = sqrt(radiusSquared-pow(i,2));
         loader.screen.drawFastVLine(currentx,y,radius-lowerposy,colour);
         currentx++;
         i++;
       }
     }else {
-      
+
       int maxX=x+radius;
       int i = 0;
       int currentx = x;
@@ -264,5 +270,3 @@ void inverseQuartCircle :: draw() {
     }
   }
 }
-
-

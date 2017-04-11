@@ -2,10 +2,14 @@
 #define load_h
 
 #include "Arduino.h"
+#include "screen.h"
+
+
 
 namespace load {
     void modeSet();
     void serialSetup();
+    eraseManager::screenObjectArray objectArray;
 }
 
 class pins {

@@ -25,10 +25,13 @@ Adafruit_ILI9341 screenLoader::screen = tft; //tell the screen loader what scree
 pins pins;
 serialProcess io;
 dataProcess data;
+screenLoader loader;
 
 void setup() {
   load::modeSet(); //set pin modes
   load::serialSetup(); //configure serial comms
+  roundDial test(loader, "POT1", 0,0,30,250,0,1024,BLACK,BLACK,BLACK,BLACK);
+  test.destroy();
 }
 
 void loop() {
@@ -36,5 +39,5 @@ void loop() {
   //TODO: COMMAND HANDLER
   //TODO: DRAW CLOCK ON A PER-OBJECT BASIS
   int i = i++;
-  int test[i]; 
+  int test[i];
 }
