@@ -48,6 +48,11 @@ void roundDial::erase() {
   loader.screen.fillRect(xPos, yPos, 2*radius, 2*radius, loader.backgroundColour);
 }
 
+void linearMeter::redraw() {
+  //TODO: ADD REDRAW CODE
+}
+
+
 roundDial :: roundDial (screenLoader _loader, String _label, int _xPos, int _yPos, int _scale,
                               float _value, float _minValue, float _maxValue, uint16_t _colour, uint16_t _accent, uint16_t _lineColour, uint16_t _textColour){
   loader = _loader;
