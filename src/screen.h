@@ -7,19 +7,6 @@
 #include <gfxfont.h>
 #include <TouchScreen.h>
 
-namespace eraseManager {
-
-  struct eraseData {
-
-  };
-
-  template<class TYPE>
-  class screenObjecvtArray {
-    void addObject(TYPE);
-    int length;
-  };
-
-}
 
 class screenUtils {
 
@@ -52,12 +39,13 @@ class inverseQuartCircle : public screenUtils {
 
 class screenObject { //tools extended by all on-screen objects
   public:
+    virtual void erase();
     void setScale(int in);
     void setXPos(int in);
     void setYPos(int in);
     void setColour(uint16_t colour);
   protected:
-
+    screenObject *getSelfReference();
     int scale;
     int xPos;
     int yPos;
@@ -66,8 +54,7 @@ class screenObject { //tools extended by all on-screen objects
 
 class roundDial : public screenObject{ //a semi-round dial filled from lower-limit to value
   public:
-    void destroy();
-    void destroyFinal();
+    void erase();
     void setOutlineColour(uint16_t colour);
     void setScale(int in);
     void draw();
@@ -100,6 +87,10 @@ class roundDial : public screenObject{ //a semi-round dial filled from lower-lim
 
 class linearMeter : public screenObject {
 
+  //TODO:FINISH LINEAR METER
+
+  public:
+    void erase();
   private:
     int oldValue;
     String label;
@@ -109,6 +100,17 @@ class linearMeter : public screenObject {
     float minValue;
     float maxValue;
 };
+
+namespace eraseManager {
+
+  class screenObjectArray {
+    public:
+      screenObject * first;
+      int length;
+      void addObject(screenObject* ptr);
+  };
+}
+
 
 
 

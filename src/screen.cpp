@@ -10,6 +10,14 @@
 #include "screen.h"
 #include "load.h"
 
+
+void eraseManager::screenObjectArray::addObject(screenObject * ptr) {
+  length++;
+  first = realloc(first, length);
+  *(first+length) = *ptr;
+}
+
+
 screenLoader :: screenLoader (uint16_t background) {
   backgroundColour = background;
 }
@@ -32,6 +40,14 @@ inverseQuartCircle :: inverseQuartCircle (int _x, int _y, int _radius, unsigned 
   loader = _loader;
 }
 
+void linearMeter::erase() {
+  //TODO: ADD ERASE FUNCTION FOR LINEAR METER
+}
+
+void roundDial::erase() {
+  loader.screen.fillRect(xPos, yPos, 2*radius, 2*radius, loader.backgroundColour);
+}
+
 roundDial :: roundDial (screenLoader _loader, String _label, int _xPos, int _yPos, int _scale,
                               float _value, float _minValue, float _maxValue, uint16_t _colour, uint16_t _accent, uint16_t _lineColour, uint16_t _textColour){
   loader = _loader;
@@ -46,10 +62,7 @@ roundDial :: roundDial (screenLoader _loader, String _label, int _xPos, int _yPo
   lineColour = _lineColour;
   label = _label;
   textColour = _textColour;
-  roundDial test = *this;
-  void (roundDial::*destroyPtr)();
-  destroyPtr = &roundDial::destroy;
-  load::objectArray.addObject(destroyPtr);
+  load::objectArray.addObject(this);
   //TODO: ADD CODE TO ADD DESTROY(*)() TO ARRAY
   recalculateVars();
   findValueRadians();
@@ -202,17 +215,6 @@ void roundDial::setScale(int in) { //causes radius to change - recalc needed
   recalculateVars();
 }
 
-void roundDial::destroy() { //destroys if new value is ready
-  if (value == oldValue) {
-    return;
-  }
-  loader.screen.fillRect(xPos, yPos, 2*radius, 2*radius, loader.backgroundColour);
-}
-
-void roundDial::destroyFinal() {
-  loader.screen.fillRect(xPos, yPos, 2*radius, 2*radius, loader.backgroundColour);
-}
-
 void inverseQuartCircle :: draw() {
   int radiusSquared = pow(radius, 2);
   if(left) { //checks if drawing vertical or horizontal
@@ -231,7 +233,6 @@ void inverseQuartCircle :: draw() {
     } else {
 
       int currentx = x+radius;
-      int currenty = y+radius;
       int i =0;
 
       while (x<=currentx) {
@@ -246,7 +247,6 @@ void inverseQuartCircle :: draw() {
   }else {
     if(top) {
       int maxX = x+radius;
-      int maxY = y+radius;
       int i = 0;
       int currentx=x;
       while (currentx<=maxX) {
@@ -258,7 +258,7 @@ void inverseQuartCircle :: draw() {
       }
     }else {
 
-      int maxX=x+radius;
+      int maxX = x+radius;
       int i = 0;
       int currentx = x;
       while (currentx<=maxX) {
