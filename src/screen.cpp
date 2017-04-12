@@ -91,7 +91,6 @@ roundDial :: roundDial (screenLoader _loader, String _label, int _xPos, int _yPo
   label = _label;
   textColour = _textColour;
   load::objectArray.addObject(this);
-  //TODO: ADD CODE TO ADD DESTROY(*)() TO ARRAY
   recalculateVars();
   findValueRadians();
 }
