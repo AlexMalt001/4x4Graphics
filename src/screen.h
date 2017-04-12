@@ -37,16 +37,15 @@ class inverseQuartCircle : public screenUtils {
 
 class dataOutput {
   public:
-    void setValue(int value);
-    void setMaxValue(int value);
-    void setMinValue(int value);
+    void setValue(float value);
+    void setMaxValue(float value);
+    void setMinValue(float value);
     void setLabel(String label);
   protected:
-    int limit;
-    int value;
-    int oldValue;
-    int maxValue;
-    int minValue;
+    float value;
+    float oldValue;
+    float maxValue;
+    float minValue;
 
 };
 
@@ -84,7 +83,7 @@ class roundDial : public screenObject{ //a semi-round dial filled from lower-lim
 
   private:
     void scaleAdjust();
-    int oldValue;
+    float oldValue;
     uint16_t lineColour;
     uint16_t accent;
     float minValue;
