@@ -38,6 +38,4 @@ void loop() {
   //TODO: SERIAL SEND CLOCK
   //TODO: COMMAND HANDLER
   eraseManager::redraw(load::objectArray);
-  int i = i++;
-  int test[i];
 }
