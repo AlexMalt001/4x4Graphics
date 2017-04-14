@@ -11,6 +11,23 @@
 #include "load.h"
 
 
+void dataOutput::setValue(float newValue) {
+  value = newValue;
+}
+
+void dataOutput::setMaxValue(float newMaxValue) {
+  maxValue = newMaxValue;
+} 
+
+void dataOutput::setLabel(String newLabel) {
+  label = newLabel;
+}
+
+void dataOutput::setMinValue(float newMinValue) {
+  minValue = newMinValue;
+}
+
+
 void eraseManager::redraw(screenObjectArray & array) {
   for (int i=0; i <= array.length; i++) {
     screenObject &obj  = *(array.first + i);
@@ -239,6 +256,10 @@ void screenObject::setScale(int in) { //sets scale of an object
 
 void roundDial::setScale(int in) { //causes radius to change - recalc needed
   screenObject :: setScale(in);
+  recalculateVars();
+}
+
+void roundDial::scaleAdjust() {
   recalculateVars();
 }
 

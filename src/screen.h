@@ -35,17 +35,30 @@ class inverseQuartCircle : public screenUtils {
     screenLoader loader;
 };
 
+class dataOutput {
+  public:
+    void setValue(float value);
+    void setMaxValue(float value);
+    void setMinValue(float value);
+    void setLabel(String label);
+  protected:
+    float value;
+    float oldValue;
+    float maxValue;
+    float minValue;
 
+};
 
 class screenObject { //tools extended by all on-screen objects
   public:
-    virtual void erase();
-    virtual void redraw();
+    virtual void erase() = 0;
+    virtual void redraw() = 0;
     void setScale(int in);
     void setXPos(int in);
     void setYPos(int in);
     void setColour(uint16_t colour);
   protected:
+    virtual void scaleAdjust() = 0;
     screenObject *getSelfReference();
     int scale;
     int xPos;
@@ -69,7 +82,8 @@ class roundDial : public screenObject{ //a semi-round dial filled from lower-lim
     roundDial(screenLoader loader, String label, int _xPos, int _yPos, int _scale, float value, float minValue, float maxValue, uint16_t colour, uint16_t accent, uint16_t lineColour, uint16_t textColour);
 
   private:
-    int oldValue;
+    void scaleAdjust();
+    float oldValue;
     uint16_t lineColour;
     uint16_t accent;
     float minValue;
@@ -95,7 +109,8 @@ class linearMeter : public screenObject {
     void redraw();
     void erase();
   private:
-    int oldValue;
+    int ratio; //ratio of length to width (x length : 1 width) * scale
+    int oldValue; 
     String label;
     float value;
     uint16_t lineColour;
