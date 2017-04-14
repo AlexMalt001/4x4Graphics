@@ -64,6 +64,7 @@ class screenObject { //tools extended by all on-screen objects
     void setYPos(int yPos); //set y position of object
     void setColour(uint16_t colour); //set colour of object
   protected:
+    screenLoader loader;
     virtual void scaleAdjust() = 0;
     screenObject *getSelfReference(); //get a screenObject* from an instance of a derived class
     int scale; //scale of object
@@ -94,8 +95,6 @@ class roundDial : public screenObject, public dataOutput{ //a semi-round dial fi
     const float maxRadians = 1.25; //max number of radians of the dial
     float valueRadians; //number of radians currently occupied by the value
     void recalculateVars(); //recalculate scale and radiuses
-    // \|/ TODO: MAKE THIS A REFERENCE/POINTER in the global object class
-    screenLoader loader; //private reference to 'global' loader object
     int radius; //outer radius of dial derived from scale
     int innerRadius; //inner radius of dial derived from scale
     uint16_t textColour; //colour of label
