@@ -252,11 +252,7 @@ void screenObject::setColour(uint16_t in) { //sets scale of an object
 
 void screenObject::setScale(int in) { //sets scale of an object
   scale = in;
-}
-
-void roundDial::setScale(int in) { //causes radius to change - recalc needed
-  screenObject :: setScale(in);
-  recalculateVars();
+  scaleAdjust();
 }
 
 void roundDial::scaleAdjust() {

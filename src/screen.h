@@ -46,6 +46,7 @@ class dataOutput {
     void setMinValue(float value);
     void setLabel(String label);
   protected:
+    String label;
     float value;
     float oldValue;
     float maxValue;
@@ -57,9 +58,9 @@ class screenObject { //tools extended by all on-screen objects
   public:
     virtual void erase() = 0; //erase object
     virtual void redraw() = 0; //erase and redraw object (for most objects, only if value has changed)
-    void setScale(int in); //set scale of object
-    void setXPos(int in);//set x position of object
-    void setYPos(int in); //set y position of object
+    void setScale(int scale); //set scale of object
+    void setXPos(int xPos);//set x position of object
+    void setYPos(int yPos); //set y position of object
     void setColour(uint16_t colour); //set colour of object
   protected:
     virtual void scaleAdjust() = 0;
@@ -76,7 +77,6 @@ class roundDial : public screenObject{ //a semi-round dial filled from lower-lim
     void redraw();// redraw object
     void erase(); //erase object
     void setOutlineColour(uint16_t colour); //set colour of object's outline
-    void setScale(int in); //set object's scale
     void draw(); //draw object with current parameters
     void setLabel(String in); //set string label of object
     void setValue(float value); //set value to display on object
