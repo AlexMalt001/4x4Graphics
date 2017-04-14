@@ -55,36 +55,23 @@ class dataOutput {
 
 class screenObject { //tools extended by all on-screen objects
   public:
-<<<<<<< HEAD
-    virtual void erase(); //erase object
-    virtual void redraw(); //erase and redraw object (for most objects, only if value has changed)
+    virtual void erase() = 0; //erase object
+    virtual void redraw() = 0; //erase and redraw object (for most objects, only if value has changed)
     void setScale(int in); //set scale of object
     void setXPos(int in);//set x position of object
     void setYPos(int in); //set y position of object
     void setColour(uint16_t colour); //set colour of object
   protected:
+    virtual void scaleAdjust() = 0;
     screenObject *getSelfReference(); //get a screenObject* from an instance of a derived class
     int scale; //scale of object
     int xPos; //x position of object
     int yPos; //y position of object
     uint16_t colour; //colour of object
-=======
-    virtual void erase() = 0;
-    virtual void redraw() = 0;
-    void setScale(int in);
-    void setXPos(int in);
-    void setYPos(int in);
-    void setColour(uint16_t colour);
-  protected:
-    virtual void scaleAdjust() = 0;
-    screenObject *getSelfReference();
-    int scale;
-    int xPos;
-    int yPos;
-    uint16_t colour;
 >>>>>>> refs/remotes/origin/draw
 };
-
+ 
+ //TODO: Fully integrate screenObject into this
 class roundDial : public screenObject{ //a semi-round dial filled from lower-limit to value
   public:
     void redraw();// redraw object
@@ -102,43 +89,24 @@ class roundDial : public screenObject{ //a semi-round dial filled from lower-lim
     roundDial(screenLoader loader, String label, int _xPos, int _yPos, int _scale, float value, float minValue, float maxValue, uint16_t colour, uint16_t accent, uint16_t lineColour, uint16_t textColour);
 
   private:
-<<<<<<< HEAD
-    int oldValue; //value from previous draw for selective redraw
+    void scaleAdjust();
+    float oldValue; //max value of the dial
     uint16_t lineColour; //colour of lines in object
     uint16_t accent; //secondary colour of object
     float minValue; //min value of the dial
     float maxValue; //max value of the dial
     void findValueRadians(); //find the number of radians which the value occupies
-    const int maxDegrees = 225; //max number of radians of the dial
-    const float maxRadians = 1.25;
+    const int maxDegrees = 225; //max number of degrees of the dial
+    const float maxRadians = 1.25; //max number of radians of the dial
     float valueRadians; //number of radians currently occupied by the value
     void recalculateVars(); //recalculate scale and radiuses
     // \|/ TODO: MAKE THIS A REFERENCE/POINTER in the global object class
-    screenLoader loader; //private reference to 'global' loader object 
+    screenLoader loader; //private reference to 'global' loader object
     String label; //label (name) of the dial
     float value; //current value (with original mapping)
     int radius; //outer radius of dial derived from scale
     int innerRadius; //inner radius of dial derived from scale
     uint16_t textColour; //colour of label
-=======
-    void scaleAdjust();
-    float oldValue;
-    uint16_t lineColour;
-    uint16_t accent;
-    float minValue;
-    float maxValue;
-    void findValueRadians();
-    int maxDegrees = 225;
-    float maxRadians = 1.25;
-    float valueRadians;
-    void recalculateVars();
-    screenLoader loader;
-    String label;
-    float value;
-    int radius;
-    int innerRadius;
-    uint16_t textColour;
->>>>>>> refs/remotes/origin/draw
 };
 
 class linearMeter : public screenObject { //a straight meter, filled from the left
@@ -149,24 +117,14 @@ class linearMeter : public screenObject { //a straight meter, filled from the le
     void redraw(); //redraw object
     void erase(); //erase object
   private:
-<<<<<<< HEAD
+    int ratio; //ratio of length to width (x length : 1 width) * scale
     int oldValue; //value from previous draw for selective redraw
     String label; //label (name) of the dial
-    float value;  //current value (with original mapping)
+    float value; //current value (with original mapping)
     uint16_t lineColour; //colour of lines in object
     uint16_t accent; //secondary colour of object
     float minValue; //min value of the dial
     float maxValue; //max value of the dial
-=======
-    int ratio; //ratio of length to width (x length : 1 width) * scale
-    int oldValue; 
-    String label;
-    float value;
-    uint16_t lineColour;
-    uint16_t accent;
-    float minValue;
-    float maxValue;
->>>>>>> refs/remotes/origin/draw
 };
 
 namespace eraseManager { //code to manage automatic erase and redraw of all objects
