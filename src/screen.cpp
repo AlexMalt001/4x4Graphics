@@ -13,10 +13,12 @@
 
 void dataOutput::setValue(float newValue) {
   value = newValue;
+  recalculateValueViz();
 }
 
 void dataOutput::setMaxValue(float newMaxValue) {
   maxValue = newMaxValue;
+  recalculateValueViz();
 } 
 
 void dataOutput::setLabel(String newLabel) {
@@ -25,6 +27,7 @@ void dataOutput::setLabel(String newLabel) {
 
 void dataOutput::setMinValue(float newMinValue) {
   minValue = newMinValue;
+  recalculateValueViz();
 }
 
 
@@ -215,26 +218,12 @@ void roundDial::draw() { //draws an on screen object of type roundDial on screen
   loader.screen.drawRect((xPos + (xposoffset/2))-2, yPos+radius+5+(textSize*8), ((6+(String(round(maxValue))).length()*(5*textSize)+String(round(value)).length())/2)+1, (textSize)*5, lineColour);
 }
 
-void roundDial::setValue(float _value) { //sets a new value for the dial, then recalculates degrees
-  value = _value;
-  findValueRadians();
-}
-
-void roundDial::setMaxValue(float _maxValue) {//sets a new maximum value for the dial, then recalculates degrees
-  maxValue = _maxValue;
-  findValueRadians();
-}
-
-void roundDial::setMinValue(float _minValue) {//sets a new minimum value for the dial, then recalculates degrees
-  minValue = _minValue;
+void roundDial::recalculateValueViz() {
   findValueRadians();
 }
 
 void roundDial::findValueRadians() { //finds number of degrees for the value
   valueRadians = (value/maxValue)*maxRadians;
-}
-void roundDial::setLabel(String _label) {
-  label = _label;
 }
 
 void screenObject::setXPos(int in) { //sets scale of an object
@@ -253,10 +242,6 @@ void screenObject::setColour(uint16_t in) { //sets scale of an object
 void screenObject::setScale(int in) { //sets scale of an object
   scale = in;
   scaleAdjust();
-}
-
-void roundDial::scaleAdjust() {
-  recalculateVars();
 }
 
 void inverseQuartCircle :: draw() {
