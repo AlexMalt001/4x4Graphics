@@ -68,7 +68,6 @@ class screenObject { //tools extended by all on-screen objects
     int xPos; //x position of object
     int yPos; //y position of object
     uint16_t colour; //colour of object
->>>>>>> refs/remotes/origin/draw
 };
  
  //TODO: Fully integrate screenObject into this
