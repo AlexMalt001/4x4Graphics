@@ -99,7 +99,7 @@ class roundDial : public screenObject, public dataOutput{ //a semi-round dial fi
     uint16_t textColour; //colour of label
 };
 
-class linearMeter : public screenObject { //a straight meter, filled from the left
+class linearMeter : public screenObject, public dataOutput { //a straight meter, filled from the left
 
   //TODO:FINISH LINEAR METER
 
@@ -109,12 +109,8 @@ class linearMeter : public screenObject { //a straight meter, filled from the le
   private:
     int ratio; //ratio of length to width (x length : 1 width) * scale
     int oldValue; //value from previous draw for selective redraw
-    String label; //label (name) of the dial
-    float value; //current value (with original mapping)
     uint16_t lineColour; //colour of lines in object
     uint16_t accent; //secondary colour of object
-    float minValue; //min value of the dial
-    float maxValue; //max value of the dial
 };
 
 namespace eraseManager { //code to manage automatic erase and redraw of all objects
