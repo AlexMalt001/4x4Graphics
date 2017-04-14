@@ -73,7 +73,6 @@ class screenObject { //tools extended by all on-screen objects
     uint16_t colour; //colour of object
 };
  
- //TODO: Fully integrate screenObject into this
 class roundDial : public screenObject, public dataOutput{ //a semi-round dial filled from lower-limit to value
   public:
     void redraw();// redraw object
