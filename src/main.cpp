@@ -23,7 +23,6 @@ Adafruit_ILI9341 screenLoader::screen = tft; //tell the screen loader what scree
 //TODO: CHANGE THESE TO NAMESPACES
 //load in external objects
 using namespace pins;  
-serialProcess io;
 dataProcess data;
 screenLoader loader;
 

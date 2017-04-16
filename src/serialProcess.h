@@ -1,8 +1,7 @@
 #ifndef serialProcess_h
 #define serialProcess_h
 
-class serialProcess {
-  public:
+namespace serialProcess {
     void sendVars(int th, int st);
 };
 
