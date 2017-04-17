@@ -22,13 +22,11 @@ Adafruit_ILI9341 screenLoader::screen = tft; //tell the screen loader what scree
 
 //TODO: CHANGE THESE TO NAMESPACES
 //load in external objects
-pins pins;
-serialProcess io;
-dataProcess data;
+using namespace pins;  
 screenLoader loader;
 
 void setup() {
-  load::modeSet(); //set pin modes
+  load::modeSet(); //set pin modes CURRENTLY REDUNDANT
   load::serialSetup(); //configure serial comms
   roundDial test(loader, "POT1", 0,0,30,250,0,1024,BLACK,BLACK,BLACK,BLACK);
   test.erase();

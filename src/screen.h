@@ -14,7 +14,7 @@ class screenUtils { //base class for drawables that are not final readouts (ie m
 };
 
 class screenLoader { //data about screen
-//TODO: MAKE THIS SUCK LESS
+//TODO: MAKE THIS SUCK LESS (means replacing ada's library)
   public:
     static Adafruit_ILI9341 screen;
     screenLoader(uint16_t background); 
