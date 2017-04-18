@@ -197,6 +197,7 @@ void roundDial::draw() { //draws an on screen object of type roundDial on screen
   loader.screen.fillTriangle(xPos+radius, yPos+(radius*2), xPos+radius, yPos+radius, xPos+(2*radius), yPos+(2*radius), loader.backgroundColour);
 
   //outlines
+  //make fastHLine
   loader.screen.drawLine(xPos, yPos+radius, xPos+(radius-innerRadius), yPos+radius, lineColour);
   int innerxyOffset = sqrt((pow(innerRadius,2))/2);
   int outerxyOffset = sqrt((pow(radius,2))/2);
